@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <title>Spottify</title>
+      <meta name='viewport' content='width=device-width, initial-scale=1'>
+      <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+      <style>
+            *{
+                  margin:0;
+                  padding:0;
+            }
+            #nav{
+                  display:flex;
+                  background-color: black;
+                  /* align-items: center;
+                  justify-content: center; */
+            }
+            #nv-spot{
+                  display:flex;
+                  color: white;
+                  align-items: center;
+                  justify-content: center;
+            }
+            #nv-bar{
+                  display:flex;
+                  color: white;
+                  align-items: center;
+                  justify-content: center;
+                  margin-left:52px;
+                  
+            }
+            #nv-bar div{
+                  padding:8px;
+            }
+            /* ================= Content  ===========================================================*/
+            #cont{
+                  background-image: url("./girl.jfif");
+                  background-repeat: no-repeat;
+                  background-size: cover;
+                  width:950px;
+                  height:400px;
+                  margin: 20px auto 20px auto ;
+
+                  background-color:rgb(245, 154, 154);
+                  border:2px solid red;
+            }
+            #copy{
+                  /* border:2px solid rgb(64, 236, 21); */
+                  margin: 10px 20px 14px 27px;
+            }
+            .list{
+                  
+                  display: flex;
+                  align-items: center;
+                  width: 400px;
+                  justify-content: space-between;
+                  margin: 5px 5px 5px 7px;
+                  background-color:white;
+                  border-radius:20px;
+            }
+            .list *{
+                  margin: 10px;
+            }
+            #play{
+                  background-color: black;
+                  bottom:0;
+                  
+            }
+            input[type="range"]{
+                  margin: 2px 2px 2px 282px;
+                  width: 955px;
+            }
+            #playbtns{
+                  /* border: 2px solid blue; */
+                  display: flex;
+                  margin: auto;
+                  padding-top: 5px;
+                  width: 947px;
+            }
+            #btn{
+                  margin: 2px 2px 2px 38px;
+                  padding-top: 12px;
+            }
+            /* #plbtn{
+                  display: none;
+            } */
+            #btmsong{
+                  color: white;
+                  width: 258px;
+                  padding-top: 13px;
+                  /* border: 2px solid white; */
+            }
+      </style>
+</head>
+<body>
+      <nav id="nav">
+            <div id="nv-spot">
+                  <img src="./spotify.png" style="height:40px;color: aliceblue;" alt="">
+                  <span>Spottify</span>
+            </div>
+            <div id="nv-bar">
+                  <div>Home</div>
+                  <div>About</div>
+            </div>
+
+      </nav>
+      <div id="cont">
+            <div id="copy">
+                  Best of Rafi Sahab- No copyright songs
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span  class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+            <div class="list">
+                  <img src="./songicon.jfif" style="height: 25px;" alt="">
+                  <span class="spann" id="x">song name</span>
+                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+            </div>
+      </div>
+      <div id="play">
+            <input type="range" value="0" id="range">
+            
+            <div id="playbtns">
+                  <img src="./gif.gif"  id="giff" style="height:53px;width: 125px; visibility: hidden;" alt="">
+                  <span id="btmsong">song name</span>
+                  <div id="btn">
+                        <img src="./back.jfif" id="bkbtn" style="height: 25px;" alt="">
+                        <img src="./playpng.png" id="plbtn"  style="height: 25px;" alt="">
+                        <img src="./for.png" id="frbtn" style="height: 25px;" alt="">
+                  </div>
+            </div>
+      </div>
+      <script>
+            var audioElement = new Audio('./songs/1s.mp3');
+            function play(){
+                  audioElement.muted=true;
+                  audioElement.play();
+                  audioElement.muted=false;
+                  audioElement.play();
+            }
+            document.getElementById("plbtn").addEventListener("click",()=>{
+                  if(audioElement.paused ){
+                        audioElement.play();
+                        document.getElementById("plbtn").src="./ps.png";
+                        document.getElementById("giff").style.visibility="visible";
+                  }
+                  else{
+                        audioElement.pause();
+                        document.getElementById("plbtn").src="./playpng.png";
+                        document.getElementById("giff").style.visibility="hidden";
+                  }
+            })
+            audioElement.addEventListener("timeupdate",()=>{
+                  let progress=parseInt((audioElement.currentTime/audioElement.duration)*100);
+                  document.getElementById("range").value=progress;
+            })
+            document.getElementById("range").addEventListener("change",()=>{
+                  console.log("changed")
+                  audioElement.currentTime=parseInt((document.getElementById("range").value*audioElement.duration)/100);
+            })
+      songname=[{name:"chahe pass ho chcahe door ho",src:"./songs/1s"},
+            {name:"chal mere dil lahra ke chal",src:"./songs/2s"},
+            {name:"chal ri sajni ab kya soche",src:"./songs/3s"},
+            {name:"chana jor garam babu",src:"./songs/4s"},
+            {name:"chand si mehbooba ho meri",src:"./songs/5s"},
+            {name:"chandi ki divar na todi",src:"./songs/6s"},
+            {name:"dum dum diga diga",src:"./songs/7s"},
+      ]
+      songs=Array.from(document.getElementsByClassName("list"));
+      songs.forEach((element,i)=>{
+            element.getElementsByClassName("spann")[0].innerText=songname[i].name;
+      })
+      function update(){
+            Array.from(document.getElementsByClassName("list")).forEach((element)=>{
+                  element.getElementsByClassName("pss").src="./ps.png";
+            })
+      }
+      songs.forEach((element,index)=>{
+            console.log(element);
+            element.getElementsByClassName("pss")[0].addEventListener("click",(e)=>{
+                  update();
+                  console.log()
+                  console.log("clicking")
+                  audioElement.src=`./songs/${index+1}s.mp3`;
+                  audioElement.play()
+                  audioElement.currentTime=0;
+            })
+            
+      })
+      </script>
+</body>
+
+</html>
