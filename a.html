@@ -113,37 +113,37 @@
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span  class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
             <div class="list">
                   <img src="./songicon.jfif" style="height: 25px;" alt="">
                   <span class="spann" id="x">song name</span>
-                  <img class="pss" src="./playpng.png" style="height: 25px;" alt="">
+                  <img class="pss" src="./playpng.png" style="height: 25px; width:25px;" alt="">
             </div>
       </div>
       <div id="play">
@@ -154,13 +154,14 @@
                   <span id="btmsong">song name</span>
                   <div id="btn">
                         <img src="./back.jfif" id="bkbtn" style="height: 25px;" alt="">
-                        <img src="./playpng.png" id="plbtn"  style="height: 25px;" alt="">
+                        <img src="./playpng.png" id="plbtn"  style="height: 25px; width:25px;" alt="">
                         <img src="./for.png" id="frbtn" style="height: 25px;" alt="">
                   </div>
             </div>
       </div>
       <script>
             var audioElement = new Audio('./songs/1s.mp3');
+            songindex=0;
             function play(){
                   audioElement.muted=true;
                   audioElement.play();
@@ -172,12 +173,44 @@
                         audioElement.play();
                         document.getElementById("plbtn").src="./ps.png";
                         document.getElementById("giff").style.visibility="visible";
+                        Array.from(document.getElementsByClassName("list"))[songindex].getElementsByClassName("pss")[0].src="./ps.png";
                   }
                   else{
                         audioElement.pause();
                         document.getElementById("plbtn").src="./playpng.png";
                         document.getElementById("giff").style.visibility="hidden";
+                        Array.from(document.getElementsByClassName("list"))[songindex].getElementsByClassName("pss")[0].src="./playpng.png";
                   }
+            })
+            document.getElementById("bkbtn").addEventListener("click",()=>{
+                  if(songindex==0)
+                        songindex=6;
+                  else
+                        songindex--; 
+                  audioElement.src=`./songs/${songindex+1}s.mp3`;
+                  audioElement.currentTime=0;
+                  audioElement.play();
+                  document.getElementById("btmsong").innerHTML=songname[songindex].name;
+                  update();
+                  document.getElementById("plbtn").src="./ps.png";
+                  Array.from(document.getElementsByClassName("list"))[songindex].getElementsByClassName("pss")[0].src="./ps.png";
+                  document.getElementById("giff").style.visibility="visible";
+                  
+            })
+            document.getElementById("frbtn").addEventListener("click",()=>{
+                  if(songindex==6)
+                        songindex=0;
+                  else
+                        songindex++; 
+                  audioElement.src=`./songs/${songindex+1}s.mp3`;
+                  audioElement.currentTime=0;
+                  audioElement.play();
+                  document.getElementById("btmsong").innerHTML=songname[songindex].name;
+                  update();
+                  document.getElementById("plbtn").src="./ps.png";
+                  Array.from(document.getElementsByClassName("list"))[songindex].getElementsByClassName("pss")[0].src="./ps.png";
+                  document.getElementById("giff").style.visibility="visible";
+                  
             })
             audioElement.addEventListener("timeupdate",()=>{
                   let progress=parseInt((audioElement.currentTime/audioElement.duration)*100);
@@ -199,20 +232,44 @@
       songs.forEach((element,i)=>{
             element.getElementsByClassName("spann")[0].innerText=songname[i].name;
       })
+      
       function update(){
             Array.from(document.getElementsByClassName("list")).forEach((element)=>{
-                  element.getElementsByClassName("pss").src="./ps.png";
+                  element.getElementsByClassName("pss")[0].src="./playpng.png";
             })
       }
       songs.forEach((element,index)=>{
-            console.log(element);
-            element.getElementsByClassName("pss")[0].addEventListener("click",(e)=>{
+            element.getElementsByClassName("pss")[0].addEventListener("click",()=>{
                   update();
-                  console.log()
-                  console.log("clicking")
-                  audioElement.src=`./songs/${index+1}s.mp3`;
-                  audioElement.play()
-                  audioElement.currentTime=0;
+                  document.getElementById("btmsong").innerHTML=songname[index].name;
+                  if(songindex!=index){
+                        songindex=index;
+                        audioElement.src=`./songs/${index+1}s.mp3`;
+                        audioElement.currentTime=0;
+                        audioElement.play();
+                        console.log("in fun",songindex);
+                        document.getElementById("plbtn").src="./ps.png";
+                        element.getElementsByClassName("pss")[0].src="./ps.png";
+                        document.getElementById("giff").style.visibility="visible";
+                  }
+                  else{
+                        if(audioElement.paused ){
+                        audioElement.play();
+                        console.log("in play clicking",audioElement.paused);
+                        document.getElementById("plbtn").src="./ps.png";
+                        element.getElementsByClassName("pss")[0].src="./ps.png";
+                        document.getElementById("giff").style.visibility="visible";
+                        }
+                        else{
+                        audioElement.pause();
+                        console.log("in ps clicking",audioElement.paused);
+                        document.getElementById("plbtn").src="./playpng.png";
+                        element.getElementsByClassName("pss")[0].src="./playpng.png";
+                        document.getElementById("giff").style.visibility="hidden";
+                        }
+                  }
+                  
+                  
             })
             
       })
